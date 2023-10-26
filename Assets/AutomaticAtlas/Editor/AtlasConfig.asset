@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8189a07c74a546b4b9b19bf1a8461110, type: 3}
   m_Name: AtlasConfig
   m_EditorClassIdentifier: 
-  checkAssetsPath: 
-  outputDirectory: 
+  checkAssetsPath: Assets/Prefab/UI
+  outputDirectory: Assets/Atlas
   atlasName_Comm: Common
   atlasName_Comm_big: Common_big
   maxSize: 2048
