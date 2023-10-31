@@ -21,6 +21,9 @@ public class ClearAtlas : EditorWindow
     private List<AltasInfo> spriteAtlas = new List<AltasInfo>();
     private List<AltasVisualElement> altasVisuals = new List<AltasVisualElement>();
 
+   private List<string> failPaths = new List<string>();
+   private List<string> clearPaths = new List<string>();
+
     [MenuItem("Tools/ClearAtlas(É¾³ýÍ¼¼¯)")]
     public static void ShowExample()
     {
@@ -69,14 +72,24 @@ public class ClearAtlas : EditorWindow
         btnClearSelect.clicked -= OnBtnClearSelectClick;
         togSelectAll.UnregisterValueChangedCallback(OnTogSelectAllValueChanged);
 
+        selectAltas.Clear();
+        spriteAtlas.Clear();
+        altasVisuals.Clear();
+        failPaths.Clear();
+        clearPaths.Clear();
     }
     private void OnBtnClearSelectClick()
     {
+       
         foreach (AltasInfo atlasInfo in selectAltas) 
         {
             atlasInfo.visualElement.Clear();
-            AssetDatabase.DeleteAsset(atlasInfo.shortPath);
+            clearPaths.Add(atlasInfo.shortPath);
         }
+        AssetDatabase.DeleteAssets(clearPaths.ToArray(), failPaths);
+
+        clearPaths.Clear();
+        failPaths.Clear();
     }
 
     private void OnTogSelectAllValueChanged(ChangeEvent<bool> evt)

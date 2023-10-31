@@ -59,9 +59,9 @@ public class AutomaticAtlas
         {
             spritePath.Clear();
             string folderName = Path.GetFileName(_subdirectory).Replace(" ", "_"); ;
-            EditorUtilityExtensions.CheckRes(_subdirectory, ".png", (_path) => //"Assets/Art/UI\\annular"
+            EditorUtilityExtensions.CheckRes(_subdirectory, ".png", (_path) =>
             {
-                string shortPath = "Assets" + @"\" + _path.Replace(dataPath, "");//"Assets\\Art\\UI\\Activity Center\\images\\Activity-Center-01.png"
+                string shortPath = "Assets" + @"\" + _path.Replace(dataPath, "");
                 string currGuid = AssetDatabase.AssetPathToGUID(shortPath);
                 if (!allDependentTextureGUIDs.Contains(currGuid)) return;
                 spritePath.Add(_path);
@@ -70,8 +70,6 @@ public class AutomaticAtlas
 
                 if (!altasDic.ContainsKey(altasName)) altasDic.Add(altasName, new List<Sprite>());
                 Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(shortPath);
-                bool isBig = sprite.rect.width >= config.maxSize || sprite.rect.height >= config.maxSize;
-                if (isBig) return;
                 altasDic[altasName].Add(AssetDatabase.LoadAssetAtPath<Sprite>(shortPath));
             });
         }
