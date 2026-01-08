@@ -1,8 +1,27 @@
 # AutomaticAtlas
-自动图集工具
 
-根据预制体的引用自动打图集，并且简单粗暴的合并重复资源
+一个 **Unity 自动图集工具**。
 
-第一次使用的时候要先创建配置资产：
+支持根据 **预制体引用关系** 或 **文件夹目录结构** 自动生成 SpriteAtlas，并以简单直接的方式合并重复资源。
 
-随便找个地方 右键→Create→Create AtlasConfig
+---
+
+## 🚀 功能入口
+
+Unity 顶部菜单：Tools -> AutomaticAtlas
+
+
+
+---
+
+## ⚙️ 初次使用
+
+第一次使用前，需要先创建配置资产 `AtlasConfig`。
+
+### 创建方式
+
+在 Unity 项目视图中任意位置：右键 → Create → Create AtlasConfig
+
+
+
+创建完成后，在 Inspector 中配置相关参数即可开始使用。
