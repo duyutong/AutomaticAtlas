@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine.U2D;
 using Unity.VisualScripting;
 using System.Drawing;
+using System.IO;
 
 public class ClearAtlas : EditorWindow
 {
@@ -24,9 +25,19 @@ public class ClearAtlas : EditorWindow
    private List<string> failPaths = new List<string>();
    private List<string> clearPaths = new List<string>();
 
-    [MenuItem("Tools/ClearAtlas(删除图集)")]
+    [MenuItem("Tools/AutomaticAtlas/ClearAtlas(删除图集)")]
     public static void ShowExample()
     {
+        if (config == null) config = AssetDatabase.LoadAssetAtPath<AtlasConfig>(configPath);
+        if (!Directory.Exists(config.outputDirectory))
+        {
+            EditorUtility.DisplayDialog(
+                "目录不存在",
+                $"{config.outputDirectory}\n目录不存在，请先创建目录或修改配置路径。",
+                "确定");
+            return;
+        }
+
         ClearAtlas wnd = GetWindow<ClearAtlas>();
         wnd.titleContent = new GUIContent("ClearAtlas");
         wnd.maxSize = new Vector2(480, 2000);
@@ -36,8 +47,7 @@ public class ClearAtlas : EditorWindow
     {
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
-
-        if (config == null) config = AssetDatabase.LoadAssetAtPath<AtlasConfig>(configPath);
+        
         // Import UXML
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Plugins/AutomaticAtlas/Editor/UIBuilder/ClearAtlas.uxml");
         visualTree.CloneTree(root);
@@ -111,6 +121,7 @@ public class ClearAtlas : EditorWindow
         altasVisuals.Clear();
         spriteAtlas.Clear();
         selectAltas.Clear();
+
         EditorUtilityExtensions.CheckRes(config.outputDirectory, ".spriteatlas", (path) =>
         {
             string shortPath = EditorUtilityExtensions.ToShortPath(path);

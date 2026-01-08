@@ -24,7 +24,7 @@ public class AutomaticAtlas
     private static Dictionary<string, TextureResInfo> repeatResDic = new Dictionary<string, TextureResInfo>();
     private static Dictionary<string, HashSet<MergeInfo>> mergeDic = new Dictionary<string, HashSet<MergeInfo>>();
     
-    [MenuItem("Tools/GenerateAtlas(自动生成图集)")]
+    [MenuItem("Tools/AutomaticAtlas/GenerateAtlas(自动生成图集)")]
     private static void GenerateAtlas()
     {
         if (config == null) config = AssetDatabase.LoadAssetAtPath<AtlasConfig>(configPath);
@@ -178,6 +178,8 @@ public class AutomaticAtlas
             atlas.SetTextureSettings(textureSettings);
 
             // 保存SpriteAtlas
+            string dir = Path.GetDirectoryName(atlasPath);
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
             AssetDatabase.CreateAsset(atlas, atlasPath);
             AssetDatabase.SaveAssets();
 

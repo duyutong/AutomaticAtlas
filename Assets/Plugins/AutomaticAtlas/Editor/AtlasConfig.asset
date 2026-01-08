@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AtlasConfig
   m_EditorClassIdentifier: 
   outputDirectory: Assets/Atlas
-  packType: 0
+  packType: 1
   checkAssetsPath: Assets/Prefab/UI
   maxSize: 1024
   atlasName_Comm: Common
